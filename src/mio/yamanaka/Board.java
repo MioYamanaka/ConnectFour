@@ -31,16 +31,15 @@ public class Board {
 	}
 	
 	public boolean isColFull(int col){
-		return board[0][col].getState() == CellState.EMPTY;
+		return board[0][col].getState() != CellState.EMPTY;
 	}
 	
 	public int getRowPosition(int col){
-		int row = 0;
-		for (int i = 0; i < rows; i++){
+		for (int i = rows - 1; i >= 0; i--){
 			if (board[i][col].getState() == CellState.EMPTY){
-				continue;
-			} row = i;
-		} return row;
+				return i;
+			}
+		} return 0;
 	}
 	
 	// DONE ALREADY
@@ -52,5 +51,17 @@ public class Board {
 			}
 			System.out.println();
 		}
+	}
+	
+	public int getRows(){
+		return rows;
+	}
+	
+	public int getCols(){
+		return cols;
+	}
+	
+	public Cell[][] getBoard(){
+		return board;
 	}
 }
