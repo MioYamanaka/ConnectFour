@@ -4,20 +4,18 @@ import java.util.Scanner;
 
 public class Driver {
 	public static void main(String[] args) {
+		welcomeMessage();
 		Scanner input = new Scanner(System.in);
-		System.out.println("How many players?");
-		int players = input.nextInt();
-		System.out.println("How many columns should the board have?");
-		int cols = input.nextInt();
-		System.out.println("How many rows should the board have?");
-		int rows = input.nextInt();
-		Board board = new Board(rows, cols);
+		System.out.println("How many players? (1 or 2)");
+		int players = validPlayers(input);
+		Board board = buildBoard(input);
 		int rounds = 0;
 		// two-player version
 		if (players == 2) {
 			while (true) {
 				// player 1
 				rounds++;
+				System.out.println("Round " + rounds);
 				int choice1 = getInput(input, board);
 				int row1 = board.getRowPosition(choice1);
 				board.getBoard()[row1][choice1].setState(CellState.P1);
@@ -176,5 +174,32 @@ public class Driver {
 				continue;
 			}
 		}
+	}
+	
+	private static void welcomeMessage() {
+		System.out.println("Welcome to Connect Four!");
+		System.out.println("Connect four of your colour to win!");
+	}
+	
+	private static Board buildBoard(Scanner input) {
+		System.out.println("How many columns should the board have?");
+		int cols = input.nextInt();
+		System.out.println("How many rows should the board have?");
+		int rows = input.nextInt();
+		Board board = new Board(rows, cols);
+		return board;
+	}
+	
+	private static int validPlayers(Scanner input) {
+		int players = 0;
+		boolean valid = false;
+		while (!valid) {
+			players = input.nextInt();
+			if (players == 1 || players == 2) {
+				valid = true;
+			} else {
+				System.out.println("Please enter either 1 or 2.");
+			}
+		} return players;
 	}
 }
