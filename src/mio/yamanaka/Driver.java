@@ -6,37 +6,44 @@ public class Driver {
 	public static void main(String[] args) {
 		welcomeMessage();
 		Scanner input = new Scanner(System.in);
-		System.out.println("How many players? (1 or 2)");
-		int players = validPlayers(input);
-		Board board = buildBoard(input);
-		int rounds = 0;
-		// two-player version
-		if (players == 2) {
-			while (true) {
-				// player 1
-				rounds++;
-				System.out.println("Round " + rounds);
-				int choice1 = getInput(input, board);
-				int row1 = board.getRowPosition(choice1);
-				board.getBoard()[row1][choice1].setState(CellState.P1);
-				board.display();
-				if (rounds >= 4) {
-					if (p1win(board)) {
-						System.out.println("Player 1 Wins!");
-						break;
+		while (true) {
+			System.out.println("How many players? (1 or 2)");
+			int players = validPlayers(input);
+			Board board = buildBoard(input);
+			int rounds = 0;
+			// two-player version
+			if (players == 2) {
+				while (true) {
+					// player 1
+					rounds++;
+					System.out.println("Round " + rounds);
+					int choice1 = getInput(input, board);
+					int row1 = board.getRowPosition(choice1);
+					board.getBoard()[row1][choice1].setState(CellState.P1);
+					board.display();
+					if (rounds >= 4) {
+						if (p1win(board)) {
+							System.out.println("Player 1 Wins!");
+							break;
+						}
+					}
+					// player 2
+					int choice2 = getInput(input, board);
+					int row2 = board.getRowPosition(choice2);
+					board.getBoard()[row2][choice2].setState(CellState.P2);
+					board.display();
+					if (rounds >= 4) {
+						if (p2win(board)) {
+							System.out.println("Player 2 Wins!");
+							break;
+						}
 					}
 				}
-				// player 2
-				int choice2 = getInput(input, board);
-				int row2 = board.getRowPosition(choice2);
-				board.getBoard()[row2][choice2].setState(CellState.P2);
-				board.display();
-				if (rounds >= 4) {
-					if (p2win(board)) {
-						System.out.println("Player 2 Wins!");
-						break;
-					}
-				}
+			} System.out.println("Play again? (Y or N)");
+			if (playAgain(input)) {
+				continue;
+			} else {
+				break;
 			}
 		}
 	}
@@ -201,5 +208,12 @@ public class Driver {
 				System.out.println("Please enter either 1 or 2.");
 			}
 		} return players;
+	}
+	
+	private static boolean playAgain(Scanner input) {
+		String choice = input.next();
+		if (choice.equals("Y")) {
+			return true;
+		} return false;
 	}
 }
