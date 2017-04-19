@@ -2,7 +2,7 @@ package mio.yamanaka;
 
 public class Cell {
 	private CellState state;
-	
+
 	public Cell(CellState cs) {
 		state = cs;
 	}
