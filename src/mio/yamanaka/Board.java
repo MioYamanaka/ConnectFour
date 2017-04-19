@@ -5,9 +5,9 @@ public class Board {
 	private int rows;
 	private int cols;
 
-	public Board(int aRows, int aCols) {
-		rows = aRows;
-		cols = aCols;
+	public Board() {
+		rows = 6;
+		cols = 7;
 
 		board = new Cell[rows][cols]; // only allocates storage, Cells are not
 										// constructed
@@ -50,7 +50,7 @@ public class Board {
 				System.out.printf("%s ", board[i][j]);
 			}
 			System.out.println();
-		}
+		} System.out.println("-------------\n1 2 3 4 5 6 7\n");
 	}
 	
 	public int getRows(){

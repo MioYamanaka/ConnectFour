@@ -18,9 +18,9 @@ public class Cell {
 	public String toString() {
 		switch (state) {
 		case P1:
-			return "P1";
+			return "1";
 		case P2:
-			return "P2";
+			return "2";
 		default:
 			return "-";
 		}
