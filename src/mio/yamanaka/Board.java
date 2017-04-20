@@ -29,19 +29,20 @@ public class Board {
 		}
 		return false;
 	}
-	
-	public boolean isColFull(int col){
+
+	public boolean isColFull(int col) {
 		return board[0][col].getState() != CellState.EMPTY;
 	}
-	
-	public int getRowPosition(int col){
-		for (int i = rows - 1; i >= 0; i--){
-			if (board[i][col].getState() == CellState.EMPTY){
+
+	public int getRowPosition(int col) {
+		for (int i = rows - 1; i >= 0; i--) {
+			if (board[i][col].getState() == CellState.EMPTY) {
 				return i;
 			}
-		} return 0;
+		}
+		return 0;
 	}
-	
+
 	// DONE ALREADY
 	public void display() {
 		System.out.println("BOARD");
@@ -50,18 +51,19 @@ public class Board {
 				System.out.printf("%s ", board[i][j]);
 			}
 			System.out.println();
-		} System.out.println("-------------\n1 2 3 4 5 6 7\n");
+		}
+		System.out.println("-------------\n1 2 3 4 5 6 7\n");
 	}
-	
-	public int getRows(){
+
+	public int getRows() {
 		return rows;
 	}
-	
-	public int getCols(){
+
+	public int getCols() {
 		return cols;
 	}
-	
-	public Cell[][] getBoard(){
+
+	public Cell[][] getBoard() {
 		return board;
 	}
 }

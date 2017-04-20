@@ -6,15 +6,17 @@ public class Driver {
 	public static void main(String[] args) {
 		welcomeMessage();
 		Scanner input = new Scanner(System.in);
-		while (true) {
+		boolean playAgain = true;
+		while (playAgain) {
 			System.out.println("How many players? (1 or 2)");
 			int players = validPlayers(input);
 			Board board = new Board();
 			board.display();
 			int rounds = 0;
+			boolean won = false;
 			// two-player version
 			if (players == 2) {
-				while (true) {
+				while (!won) {
 					rounds++;
 					System.out.println("Round " + rounds);
 					// player 1
@@ -22,7 +24,8 @@ public class Driver {
 					if (rounds >= 4) {
 						if (win(board, CellState.P1)) {
 							System.out.println("Player 1 Wins!\n");
-							break;
+							won = true;
+							continue;
 						}
 					}
 					// player 2
@@ -30,7 +33,8 @@ public class Driver {
 					if (rounds >= 4) {
 						if (win(board, CellState.P2)) {
 							System.out.println("Player 2 Wins!\n");
-							break;
+							won = true;
+							continue;
 						}
 					}
 				}
@@ -38,7 +42,7 @@ public class Driver {
 				// one-player version
 				// implement AI
 				
-				while (true) {
+				while (!won) {
 					rounds++;
 					System.out.println("Round " + rounds + "\n");
 					// player 1
@@ -46,7 +50,8 @@ public class Driver {
 					if (rounds >= 4) {
 						if (win(board, CellState.P1)) {
 							System.out.println("Player 1 Wins!\n");
-							break;
+							won = true;
+							continue;
 						}
 					} // AI
 					
@@ -54,10 +59,8 @@ public class Driver {
 			}
 			System.out.println("Play again? (Y or N)");
 
-			if (playAgain(input)) {
-				continue;
-			} else {
-				break;
+			if (!playAgain(input)) {
+				playAgain = false;
 			}
 		}
 	}
